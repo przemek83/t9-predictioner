@@ -1,10 +1,10 @@
 #include <QApplication>
 #include "mainwindow.h"
 
-#include <QTextCodec>
+// #include <QTextCodec>
 #include <QTranslator>
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     translator.load("qt_pl.qm", QCoreApplication::applicationDirPath());
     a.installTranslator(&translator);
 
-//    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-//    QTextCodec::setCodecForTr (QTextCodec::codecForName ("UTF-8"));
+    //    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    //    QTextCodec::setCodecForTr (QTextCodec::codecForName ("UTF-8"));
 
     MainWindow w;
     w.show();

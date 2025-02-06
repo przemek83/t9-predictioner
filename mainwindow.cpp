@@ -1,12 +1,14 @@
 #include "mainwindow.h"
+#include <qregularexpression.h>
+
+#include <QClipboard>
+#include <QDebug>
+#include <QRegularExpression>
+
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-#include <QClipboard>
-
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -16,18 +18,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     file_.open(QIODevice::ReadOnly);
 
-    if(file_.isOpen())
+    if (file_.isOpen())
         ui->statusBar->showMessage("Dictionary opened...");
 
     ladujDane();
 
-    ui->statusBar->showMessage("Loaded " + QString::number(slowa_.size()) + " unique combinations.");
+    ui->statusBar->showMessage("Loaded " + QString::number(slowa_.size()) +
+                               " unique combinations.");
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::ladujDane()
 {
@@ -37,49 +37,49 @@ void MainWindow::ladujDane()
 
     QStringList stringList = wholeString.split('\n');
 
-    ui->statusBar->showMessage(tr("Strings loaded ") + QString::number(stringList.count()));
+    ui->statusBar->showMessage(tr("Strings loaded ") +
+                               QString::number(stringList.count()));
 
-    //int counter = 0;
-    foreach(QString text, stringList)
+    // int counter = 0;
+    foreach (QString text, stringList)
     {
         int index = text.indexOf('/');
 
-
-        if(index != -1)
+        if (index != -1)
             text.truncate(index);
 
-//        if(counter <500)
-//        {
-//            qDebug() << text;
-//            counter++;
-//        }
+        //        if(counter <500)
+        //        {
+        //            qDebug() << text;
+        //            counter++;
+        //        }
 
-        if(text.contains('-'))
+        if (text.contains('-'))
             continue;
 
-        text.replace(QRegExp("\\W"), "");
+        text.replace(QRegularExpression("\\W"), "");
         slowa_.insert(convert(text), text);
     }
 
-//    counter = 0;
-//    QMultiMap<QString, QString>::iterator i = slowa_.begin();
-//    while (i != slowa_.end())
-//    {
-//        qDebug() << i.value();
-//         ++i;
-//     }
+    //    counter = 0;
+    //    QMultiMap<QString, QString>::iterator i = slowa_.begin();
+    //    while (i != slowa_.end())
+    //    {
+    //        qDebug() << i.value();
+    //         ++i;
+    //     }
 }
 
 QString MainWindow::convert(QString text)
 {
-//    a ą b c ć
-//    d e ę f
-//    g h i
-//    j k l ł
-//    m n ń o ó
-//    p q r s ś
-//    t u v
-//    w x y z ź ż;
+    //    a ą b c ć
+    //    d e ę f
+    //    g h i
+    //    j k l ł
+    //    m n ń o ó
+    //    p q r s ś
+    //    t u v
+    //    w x y z ź ż;
 
     static QString dwa("2");
     text.replace(QString("a"), dwa, Qt::CaseInsensitive);
@@ -150,18 +150,15 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-void MainWindow::on_lineEdit_returnPressed()
-{
-    on_pushButton_clicked();
-}
+void MainWindow::on_lineEdit_returnPressed() { on_pushButton_clicked(); }
 
 void MainWindow::getWord()
 {
-    QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setText(dynamic_cast< QPushButton*>(sender())->text());
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(dynamic_cast<QPushButton*>(sender())->text());
 }
 
-void MainWindow::on_lineEdit_textChanged(const QString &/*arg1*/)
+void MainWindow::on_lineEdit_textChanged(const QString& /*arg1*/)
 {
     on_pushButton_clicked();
 }

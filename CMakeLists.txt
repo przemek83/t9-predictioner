@@ -23,19 +23,19 @@ qt_standard_project_setup()
 # file(COPY <TODO: file> DESTINATION ${CMAKE_BINARY_DIR})
 
 set(${PROJECT_NAME}_SOURCES
-    mainwindow.h
-    mainwindow.cpp
+    src/mainwindow.h
+    src/mainwindow.cpp
 )
 
 set(UI
-    mainwindow.ui
+    src/mainwindow.ui
 )
 source_group("UI Files" FILES ${UI})
 
 add_library (${PROJECT_NAME}-lib STATIC ${${PROJECT_NAME}_SOURCES} ${UI})
 target_link_libraries(${PROJECT_NAME}-lib PRIVATE Qt6::Core Qt6::Widgets)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib Qt6::Widgets)
 
 # enable_testing()

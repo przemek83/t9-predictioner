@@ -23,12 +23,12 @@ qt_standard_project_setup()
 # file(COPY <TODO: file> DESTINATION ${CMAKE_BINARY_DIR})
 
 set(${PROJECT_NAME}_SOURCES
-    src/mainwindow.h
-    src/mainwindow.cpp
+    src/MainWindow.h
+    src/MainWindow.cpp
 )
 
 set(UI
-    src/mainwindow.ui
+    src/MainWindow.ui
 )
 source_group("UI Files" FILES ${UI})
 

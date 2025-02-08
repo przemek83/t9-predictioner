@@ -25,6 +25,8 @@ file(COPY dictionary.dic DESTINATION ${CMAKE_BINARY_DIR})
 set(${PROJECT_NAME}_SOURCES
     src/MainWindow.h
     src/MainWindow.cpp
+    src/Converter.h
+    src/Converter.cpp
 )
 
 set(UI

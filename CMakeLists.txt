@@ -20,7 +20,7 @@ endif()
 find_package(Qt6 REQUIRED COMPONENTS Widgets Core)
 qt_standard_project_setup()
 
-# file(COPY <TODO: file> DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY dictionary.dic DESTINATION ${CMAKE_BINARY_DIR})
 
 set(${PROJECT_NAME}_SOURCES
     src/MainWindow.h

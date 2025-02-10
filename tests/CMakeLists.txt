@@ -6,7 +6,11 @@ set(${PROJECT_TESTS}_SOURCES
     Tests.cpp
     ConvertTest.h
     ConvertTest.cpp
+    DataLoaderTest.h
+    DataLoaderTest.cpp
 )
+
+file(COPY ${CMAKE_SOURCE_DIR}/dictionary.dic DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(${PROJECT_TESTS} ${${PROJECT_TESTS}_SOURCES})
 

@@ -2,8 +2,6 @@
 
 #include <QObject>
 
-class TestTableModel;
-
 class ConvertTest : public QObject
 {
     Q_OBJECT

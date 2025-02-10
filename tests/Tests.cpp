@@ -1,6 +1,7 @@
 #include <QTest>
 
 #include "ConvertTest.h"
+#include "DataLoaderTest.h"
 
 int main(int argc, char* argv[])
 {
@@ -8,6 +9,9 @@ int main(int argc, char* argv[])
 
     ConvertTest convertTest;
     QTest::qExec(&convertTest);
+
+    DataLoaderTest dataLoaderTest;
+    QTest::qExec(&dataLoaderTest);
 
     return 0;
 }

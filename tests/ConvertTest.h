@@ -8,5 +8,6 @@ class ConvertTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void testCheck() const;
+    static void testConversion_data();
+    static void testConversion();
 };

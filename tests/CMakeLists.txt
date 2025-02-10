@@ -1,5 +1,7 @@
 SET(PROJECT_TESTS ${PROJECT_NAME}-tests)
 
+include_directories(${CMAKE_SOURCE_DIR})
+
 set(${PROJECT_TESTS}_SOURCES
     Tests.cpp
     ConvertTest.h

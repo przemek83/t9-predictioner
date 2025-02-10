@@ -1,12 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFile>
 #include <QMainWindow>
 #include <QMultiMap>
-#include <QFile>
 
-namespace Ui {
-    class MainWindow;
+namespace Ui
+{
+class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -14,7 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
 
 private slots:
@@ -24,12 +25,10 @@ private slots:
 
     void getWord();
 
-    void on_lineEdit_textChanged(const QString &arg1);
+    void on_lineEdit_textChanged(const QString& arg1);
 
 private:
-    Ui::MainWindow *ui;
-
-    QFile file_;
+    Ui::MainWindow* ui;
 
     void ladujDane();
 
@@ -38,4 +37,4 @@ private:
     QString convert(QString text);
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

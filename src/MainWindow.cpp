@@ -5,6 +5,7 @@
 #include <QRegularExpression>
 
 #include "Converter.h"
+#include "DataLoader.h"
 #include "ui_MainWindow.h"
 
 MainWindow::MainWindow(QWidget* parent)
@@ -13,13 +14,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui->setupUi(this);
 
     ui->statusBar->showMessage("Loading dictionary...");
-
-    file_.setFileName("dictionary.dic");
-
-    file_.open(QIODevice::ReadOnly);
-
-    if (file_.isOpen())
-        ui->statusBar->showMessage("Dictionary opened...");
 
     ladujDane();
 
@@ -31,43 +25,11 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::ladujDane()
 {
-    QByteArray wholeText = file_.readAll();
-
-    QString wholeString(wholeText);
-
-    QStringList stringList = wholeString.split('\n');
+    DataLoader loader("dictionary.dic");
+    slowa_ = loader.getData();
 
     ui->statusBar->showMessage(tr("Strings loaded ") +
-                               QString::number(stringList.count()));
-
-    // int counter = 0;
-    foreach (QString text, stringList)
-    {
-        int index = text.indexOf('/');
-
-        if (index != -1)
-            text.truncate(index);
-
-        //        if(counter <500)
-        //        {
-        //            qDebug() << text;
-        //            counter++;
-        //        }
-
-        if (text.contains('-'))
-            continue;
-
-        text.replace(QRegularExpression("\\W"), "");
-        slowa_.insert(convert(text), text);
-    }
-
-    //    counter = 0;
-    //    QMultiMap<QString, QString>::iterator i = slowa_.begin();
-    //    while (i != slowa_.end())
-    //    {
-    //        qDebug() << i.value();
-    //         ++i;
-    //     }
+                               QString::number(slowa_.count()));
 }
 
 QString MainWindow::convert(QString text)

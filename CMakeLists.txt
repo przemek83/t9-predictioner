@@ -27,6 +27,8 @@ set(${PROJECT_NAME}_SOURCES
     src/MainWindow.cpp
     src/Converter.h
     src/Converter.cpp
+    src/DataLoader.h
+    src/DataLoader.cpp
 )
 
 set(UI

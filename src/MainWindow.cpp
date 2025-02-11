@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 
+#include <fstream>
+
 #include <QClipboard>
 #include <QDebug>
 #include <QRegularExpression>
@@ -25,17 +27,12 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::ladujDane()
 {
-    DataLoader loader("dictionary.dic");
+    auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
+    DataLoader loader(std::move(inFile));
     slowa_ = loader.getData();
 
     ui->statusBar->showMessage(tr("Strings loaded ") +
                                QString::number(slowa_.count()));
-}
-
-QString MainWindow::convert(QString text)
-{
-    Converter::convert(text);
-    return text;
 }
 
 void MainWindow::on_pushButton_clicked()

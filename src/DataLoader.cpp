@@ -5,27 +5,18 @@
 
 #include <QRegularExpression>
 
-// DataLoader::DataLoader(std::unique_ptr<std::istream> stream)
-//     : stream_(std::move(stream))
-DataLoader::DataLoader(const QString& filePath)
+DataLoader::DataLoader(std::unique_ptr<std::istream> stream)
+    : stream_(std::move(stream))
 {
-    file_.setFileName(filePath);
-
-    file_.open(QIODevice::ReadOnly);
 }
 
 QMultiMap<QString, QString> DataLoader::getData()
 {
-    QByteArray wholeText = file_.readAll();
-
-    QString wholeString(wholeText);
-
-    QStringList stringList = wholeString.split('\n');
-
+    std::string line;
     QMultiMap<QString, QString> words;
-
-    foreach (QString text, stringList)
+    while (std::getline(*stream_, line))
     {
+        QString text{QString::fromStdString(line)};
         if (qsizetype index{text.indexOf('/')}; index != -1)
             text.truncate(index);
 

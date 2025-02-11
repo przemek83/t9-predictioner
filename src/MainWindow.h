@@ -33,8 +33,6 @@ private:
     void ladujDane();
 
     QMultiMap<QString, QString> slowa_;
-
-    QString convert(QString text);
 };
 
 #endif  // MAINWINDOW_H

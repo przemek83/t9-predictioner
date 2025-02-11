@@ -20,10 +20,6 @@ QMultiMap<QString, QString> DataLoader::getData()
         if (qsizetype index{text.indexOf('/')}; index != -1)
             text.truncate(index);
 
-        if (text.contains('-'))
-            continue;
-
-        text.replace(QRegularExpression("\\W"), "");
         QString converted{text};
         Converter::convert(converted);
         words.insert(converted, text);

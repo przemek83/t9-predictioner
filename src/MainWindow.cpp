@@ -11,19 +11,19 @@
 #include "ui_MainWindow.h"
 
 MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui_{std::make_unique<Ui::MainWindow>()}
 {
-    ui->setupUi(this);
+    ui_->setupUi(this);
 
-    ui->statusBar->showMessage("Loading dictionary...");
+    ui_->statusBar->showMessage("Loading dictionary...");
 
     ladujDane();
 
-    ui->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
-                               " unique combinations.");
+    ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
+                                " unique combinations.");
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() = default;
 
 void MainWindow::ladujDane()
 {
@@ -31,25 +31,25 @@ void MainWindow::ladujDane()
     DataLoader loader(std::move(inFile));
     words_ = loader.getData();
 
-    ui->statusBar->showMessage(tr("Strings loaded ") +
-                               QString::number(words_.size()));
+    ui_->statusBar->showMessage(tr("Strings loaded ") +
+                                QString::number(words_.size()));
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->tableWidget->clear();
+    ui_->tableWidget->clear();
 
-    auto [first, last]{words_.equal_range(ui->lineEdit->text())};
+    auto [first, last]{words_.equal_range(ui_->lineEdit->text())};
 
-    ui->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
+    ui_->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
     int index{0};
     for (auto el = first; el != last; ++el)
     {
         qDebug() << el->first << ": " << el->second << '\n';
-        ui->tableWidget->setItem(index, 0, new QTableWidgetItem(el->second));
-        QPushButton* button = new QPushButton(el->second, ui->tableWidget);
+        ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(el->second));
+        QPushButton* button = new QPushButton(el->second, ui_->tableWidget);
         connect(button, SIGNAL(clicked()), this, SLOT(getWord()));
-        ui->tableWidget->setCellWidget(index, 1, button);
+        ui_->tableWidget->setCellWidget(index, 1, button);
         ++index;
     }
 }

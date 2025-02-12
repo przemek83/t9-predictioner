@@ -5,6 +5,7 @@
 
 #include <QFile>
 #include <QMainWindow>
+#include <memory>
 
 namespace Ui
 {
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget* parent = 0);
-    ~MainWindow();
+    ~MainWindow() override;
 
 private slots:
     void on_pushButton_clicked();
@@ -29,7 +30,7 @@ private slots:
     void on_lineEdit_textChanged(const QString& arg1);
 
 private:
-    Ui::MainWindow* ui;
+    std::unique_ptr<Ui::MainWindow> ui_;
 
     void ladujDane();
 

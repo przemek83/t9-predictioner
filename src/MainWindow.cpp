@@ -6,12 +6,10 @@
 #include <QDebug>
 #include <QRegularExpression>
 
-#include "Converter.h"
 #include "DataLoader.h"
 #include "ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent), ui_{std::make_unique<Ui::MainWindow>()}
+MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
 {
     ui_->setupUi(this);
 

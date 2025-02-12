@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <map>
 
@@ -36,5 +35,3 @@ private:
 
     std::multimap<QString, QString> words_;
 };
-
-#endif  // MAINWINDOW_H

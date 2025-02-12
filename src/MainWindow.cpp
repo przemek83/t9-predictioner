@@ -3,8 +3,6 @@
 #include <fstream>
 
 #include <QClipboard>
-#include <QDebug>
-#include <QRegularExpression>
 
 #include "DataLoader.h"
 #include "ui_MainWindow.h"

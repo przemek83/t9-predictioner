@@ -41,10 +41,11 @@ void MainWindow::on_pushButton_clicked()
 
     ui_->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
     int index{0};
-    for (auto el = first; el != last; ++el)
+    for (auto it{first}; it != last; ++it)
     {
-        ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(el->second));
-        QPushButton* button = new QPushButton(el->second, ui_->tableWidget);
+        const auto& [_, word]{*it};
+        ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(word));
+        QPushButton* button{new QPushButton(word, ui_->tableWidget)};
         connect(button, SIGNAL(clicked()), this, SLOT(getWord()));
         ui_->tableWidget->setCellWidget(index, 1, button);
         ++index;
@@ -55,7 +56,7 @@ void MainWindow::on_lineEdit_returnPressed() { on_pushButton_clicked(); }
 
 void MainWindow::getWord() const
 {
-    QClipboard* clipboard = QApplication::clipboard();
+    QClipboard* clipboard{QApplication::clipboard()};
     clipboard->setText(dynamic_cast<QPushButton*>(sender())->text());
 }
 

@@ -24,7 +24,7 @@ private slots:
 
     void on_lineEdit_returnPressed();
 
-    void getWord();
+    void getWord() const;
 
     void on_lineEdit_textChanged(const QString& arg1);
 

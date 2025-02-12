@@ -56,7 +56,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_lineEdit_returnPressed() { on_pushButton_clicked(); }
 
-void MainWindow::getWord()
+void MainWindow::getWord() const
 {
     QClipboard* clipboard = QApplication::clipboard();
     clipboard->setText(dynamic_cast<QPushButton*>(sender())->text());

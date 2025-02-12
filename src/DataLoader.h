@@ -11,7 +11,7 @@ class DataLoader
 public:
     explicit DataLoader(std::unique_ptr<std::istream> stream);
 
-    QMultiMap<QString, QString> getData();
+    std::multimap<QString, QString> getData();
 
 private:
     std::unique_ptr<std::istream> stream_;

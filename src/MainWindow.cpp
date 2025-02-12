@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     ladujDane();
 
-    ui->statusBar->showMessage("Loaded " + QString::number(slowa_.size()) +
+    ui->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
                                " unique combinations.");
 }
 
@@ -29,24 +29,28 @@ void MainWindow::ladujDane()
 {
     auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
     DataLoader loader(std::move(inFile));
-    slowa_ = loader.getData();
+    words_ = loader.getData();
 
     ui->statusBar->showMessage(tr("Strings loaded ") +
-                               QString::number(slowa_.count()));
+                               QString::number(words_.size()));
 }
 
 void MainWindow::on_pushButton_clicked()
 {
     ui->tableWidget->clear();
 
-    QList<QString> values = slowa_.values(ui->lineEdit->text());
-    ui->tableWidget->setRowCount(values.size());
-    for (int i = 0; i < values.size(); ++i)
+    auto [first, last]{words_.equal_range(ui->lineEdit->text())};
+
+    ui->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
+    int index{0};
+    for (auto el = first; el != last; ++el)
     {
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(values.at(i)));
-        QPushButton* button = new QPushButton(values.at(i), ui->tableWidget);
+        qDebug() << el->first << ": " << el->second << '\n';
+        ui->tableWidget->setItem(index, 0, new QTableWidgetItem(el->second));
+        QPushButton* button = new QPushButton(el->second, ui->tableWidget);
         connect(button, SIGNAL(clicked()), this, SLOT(getWord()));
-        ui->tableWidget->setCellWidget(i, 1, button);
+        ui->tableWidget->setCellWidget(index, 1, button);
+        ++index;
     }
 }
 

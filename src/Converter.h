@@ -2,5 +2,5 @@
 
 namespace Converter
 {
-void convert(QString& text);
+QString convert(const QString& word);
 }  // namespace Converter

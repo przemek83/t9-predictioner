@@ -2,7 +2,7 @@
 
 namespace Converter
 {
-void convert(QString& text)
+QString convert(const QString& word)
 {
     //    a ą b c ć
     //    d e ę f
@@ -13,56 +13,60 @@ void convert(QString& text)
     //    t u v
     //    w x y z ź ż;
 
+    QString converted{word};
+
     static QString dwa("2");
-    text.replace(QString("a"), dwa, Qt::CaseInsensitive);
-    text.replace(QString("ą"), dwa, Qt::CaseInsensitive);
-    text.replace(QString("b"), dwa, Qt::CaseInsensitive);
-    text.replace(QString("c"), dwa, Qt::CaseInsensitive);
-    text.replace(QString("ć"), dwa, Qt::CaseInsensitive);
+    converted.replace(QString("a"), dwa, Qt::CaseInsensitive);
+    converted.replace(QString("ą"), dwa, Qt::CaseInsensitive);
+    converted.replace(QString("b"), dwa, Qt::CaseInsensitive);
+    converted.replace(QString("c"), dwa, Qt::CaseInsensitive);
+    converted.replace(QString("ć"), dwa, Qt::CaseInsensitive);
 
     static QString trzy("3");
-    text.replace(QString("d"), trzy, Qt::CaseInsensitive);
-    text.replace(QString("e"), trzy, Qt::CaseInsensitive);
-    text.replace(QString("ę"), trzy, Qt::CaseInsensitive);
-    text.replace(QString("f"), trzy, Qt::CaseInsensitive);
+    converted.replace(QString("d"), trzy, Qt::CaseInsensitive);
+    converted.replace(QString("e"), trzy, Qt::CaseInsensitive);
+    converted.replace(QString("ę"), trzy, Qt::CaseInsensitive);
+    converted.replace(QString("f"), trzy, Qt::CaseInsensitive);
 
     static QString cztery("4");
-    text.replace(QString("g"), cztery, Qt::CaseInsensitive);
-    text.replace(QString("h"), cztery, Qt::CaseInsensitive);
-    text.replace(QString("i"), cztery, Qt::CaseInsensitive);
+    converted.replace(QString("g"), cztery, Qt::CaseInsensitive);
+    converted.replace(QString("h"), cztery, Qt::CaseInsensitive);
+    converted.replace(QString("i"), cztery, Qt::CaseInsensitive);
 
     static QString piec("5");
-    text.replace(QString("j"), piec, Qt::CaseInsensitive);
-    text.replace(QString("k"), piec, Qt::CaseInsensitive);
-    text.replace(QString("l"), piec, Qt::CaseInsensitive);
-    text.replace(QString("ł"), piec, Qt::CaseInsensitive);
+    converted.replace(QString("j"), piec, Qt::CaseInsensitive);
+    converted.replace(QString("k"), piec, Qt::CaseInsensitive);
+    converted.replace(QString("l"), piec, Qt::CaseInsensitive);
+    converted.replace(QString("ł"), piec, Qt::CaseInsensitive);
 
     static QString szesc("6");
-    text.replace(QString("m"), szesc, Qt::CaseInsensitive);
-    text.replace(QString("n"), szesc, Qt::CaseInsensitive);
-    text.replace(QString("ń"), szesc, Qt::CaseInsensitive);
-    text.replace(QString("o"), szesc, Qt::CaseInsensitive);
-    text.replace(QString("ó"), szesc, Qt::CaseInsensitive);
+    converted.replace(QString("m"), szesc, Qt::CaseInsensitive);
+    converted.replace(QString("n"), szesc, Qt::CaseInsensitive);
+    converted.replace(QString("ń"), szesc, Qt::CaseInsensitive);
+    converted.replace(QString("o"), szesc, Qt::CaseInsensitive);
+    converted.replace(QString("ó"), szesc, Qt::CaseInsensitive);
 
     static QString siedem("7");
-    text.replace(QString("p"), siedem, Qt::CaseInsensitive);
-    text.replace(QString("q"), siedem, Qt::CaseInsensitive);
-    text.replace(QString("r"), siedem, Qt::CaseInsensitive);
-    text.replace(QString("s"), siedem, Qt::CaseInsensitive);
-    text.replace(QString("ś"), siedem, Qt::CaseInsensitive);
+    converted.replace(QString("p"), siedem, Qt::CaseInsensitive);
+    converted.replace(QString("q"), siedem, Qt::CaseInsensitive);
+    converted.replace(QString("r"), siedem, Qt::CaseInsensitive);
+    converted.replace(QString("s"), siedem, Qt::CaseInsensitive);
+    converted.replace(QString("ś"), siedem, Qt::CaseInsensitive);
 
     static QString osiem("8");
-    text.replace(QString("t"), osiem, Qt::CaseInsensitive);
-    text.replace(QString("u"), osiem, Qt::CaseInsensitive);
-    text.replace(QString("v"), osiem, Qt::CaseInsensitive);
+    converted.replace(QString("t"), osiem, Qt::CaseInsensitive);
+    converted.replace(QString("u"), osiem, Qt::CaseInsensitive);
+    converted.replace(QString("v"), osiem, Qt::CaseInsensitive);
 
     static QString dziewiec("9");
-    text.replace(QString("w"), dziewiec, Qt::CaseInsensitive);
-    text.replace(QString("x"), dziewiec, Qt::CaseInsensitive);
-    text.replace(QString("y"), dziewiec, Qt::CaseInsensitive);
-    text.replace(QString("z"), dziewiec, Qt::CaseInsensitive);
-    text.replace(QString("ż"), dziewiec, Qt::CaseInsensitive);
-    text.replace(QString("ź"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("w"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("x"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("y"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("z"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("ż"), dziewiec, Qt::CaseInsensitive);
+    converted.replace(QString("ź"), dziewiec, Qt::CaseInsensitive);
+
+    return converted;
 }
 
 }  // namespace Converter

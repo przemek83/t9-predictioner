@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <map>
+
 #include <QFile>
 #include <QMainWindow>
-#include <QMultiMap>
 
 namespace Ui
 {
@@ -32,7 +33,7 @@ private:
 
     void ladujDane();
 
-    QMultiMap<QString, QString> slowa_;
+    std::multimap<QString, QString> words_;
 };
 
 #endif  // MAINWINDOW_H

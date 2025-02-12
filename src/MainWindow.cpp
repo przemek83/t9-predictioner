@@ -43,7 +43,6 @@ void MainWindow::on_pushButton_clicked()
     int index{0};
     for (auto el = first; el != last; ++el)
     {
-        qDebug() << el->first << ": " << el->second << '\n';
         ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(el->second));
         QPushButton* button = new QPushButton(el->second, ui_->tableWidget);
         connect(button, SIGNAL(clicked()), this, SLOT(getWord()));

@@ -27,7 +27,7 @@ QString convert(const QString& word)
 
     QString converted(word);
     int index{0};
-    for (QString ch : word)
+    for (const QChar& ch : word)
     {
         if (auto it{map.find(ch)}; it != map.end())
             converted[index] = it->second;

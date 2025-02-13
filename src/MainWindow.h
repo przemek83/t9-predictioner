@@ -1,10 +1,9 @@
 #pragma once
 
 #include <map>
-
-#include <QFile>
-#include <QMainWindow>
 #include <memory>
+
+#include <QMainWindow>
 
 namespace Ui
 {

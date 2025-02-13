@@ -1,9 +1,8 @@
 #pragma once
 
+#include <map>
 #include <memory>
 
-#include <QFile>
-#include <QMultiMap>
 #include <QString>
 
 class DataLoader

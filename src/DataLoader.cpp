@@ -1,10 +1,8 @@
 #include "DataLoader.h"
-#include <qtypes.h>
+
+#include <istream>
 
 #include "Converter.h"
-
-#include <QRegularExpression>
-#include <map>
 
 DataLoader::DataLoader(std::unique_ptr<std::istream> stream)
     : stream_(std::move(stream))

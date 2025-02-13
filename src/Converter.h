@@ -2,7 +2,7 @@
 
 #include <QString>
 
-namespace Converter
+namespace converter
 {
 QString convert(const QString& word);
-}  // namespace Converter
+}  // namespace converter

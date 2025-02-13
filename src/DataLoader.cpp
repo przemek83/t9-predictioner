@@ -21,7 +21,7 @@ std::multimap<QString, QString> DataLoader::getData()
         if (qsizetype index{text.indexOf('/')}; index != -1)
             text.truncate(index);
 
-        words.emplace(Converter::convert(text), std::move(text));
+        words.emplace(converter::convert(text), std::move(text));
     }
 
     return words;

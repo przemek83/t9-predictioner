@@ -19,7 +19,7 @@ std::unordered_map<QString, QChar> getMap()
 }
 }  // namespace
 
-namespace Converter
+namespace converter
 {
 QString convert(const QString& word)
 {
@@ -37,4 +37,4 @@ QString convert(const QString& word)
     return converted;
 }
 
-}  // namespace Converter
+}  // namespace converter

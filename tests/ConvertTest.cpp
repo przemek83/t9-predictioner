@@ -29,5 +29,5 @@ void ConvertTest::testConversion()
     QFETCH(QString, input);
     QFETCH(const QString, expected);
 
-    QCOMPARE(Converter::convert(input), expected);
+    QCOMPARE(converter::convert(input), expected);
 }

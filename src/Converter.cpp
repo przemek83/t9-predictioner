@@ -1,70 +1,38 @@
 #include "Converter.h"
 
+#include <unordered_map>
+
+#include <QHash>
+
+namespace
+{
+
+std::unordered_map<QString, QChar> getMap()
+{
+    return {{"a", '2'}, {"ą", '2'}, {"b", '2'}, {"c", '2'}, {"ć", '2'},
+            {"d", '3'}, {"e", '3'}, {"ę", '3'}, {"f", '3'}, {"g", '4'},
+            {"h", '4'}, {"i", '4'}, {"j", '5'}, {"k", '5'}, {"l", '5'},
+            {"ł", '5'}, {"m", '6'}, {"n", '6'}, {"ń", '6'}, {"o", '6'},
+            {"ó", '6'}, {"p", '7'}, {"q", '7'}, {"r", '7'}, {"s", '7'},
+            {"ś", '7'}, {"t", '8'}, {"u", '8'}, {"v", '8'}, {"w", '9'},
+            {"x", '9'}, {"y", '9'}, {"z", '9'}, {"ż", '9'}, {"ź", '9'}};
+}
+}  // namespace
+
 namespace Converter
 {
 QString convert(const QString& word)
 {
-    //    a ą b c ć
-    //    d e ę f
-    //    g h i
-    //    j k l ł
-    //    m n ń o ó
-    //    p q r s ś
-    //    t u v
-    //    w x y z ź ż;
+    static std::unordered_map<QString, QChar> map{getMap()};
 
-    QString converted{word};
-
-    static QString dwa("2");
-    converted.replace(QString("a"), dwa, Qt::CaseInsensitive);
-    converted.replace(QString("ą"), dwa, Qt::CaseInsensitive);
-    converted.replace(QString("b"), dwa, Qt::CaseInsensitive);
-    converted.replace(QString("c"), dwa, Qt::CaseInsensitive);
-    converted.replace(QString("ć"), dwa, Qt::CaseInsensitive);
-
-    static QString trzy("3");
-    converted.replace(QString("d"), trzy, Qt::CaseInsensitive);
-    converted.replace(QString("e"), trzy, Qt::CaseInsensitive);
-    converted.replace(QString("ę"), trzy, Qt::CaseInsensitive);
-    converted.replace(QString("f"), trzy, Qt::CaseInsensitive);
-
-    static QString cztery("4");
-    converted.replace(QString("g"), cztery, Qt::CaseInsensitive);
-    converted.replace(QString("h"), cztery, Qt::CaseInsensitive);
-    converted.replace(QString("i"), cztery, Qt::CaseInsensitive);
-
-    static QString piec("5");
-    converted.replace(QString("j"), piec, Qt::CaseInsensitive);
-    converted.replace(QString("k"), piec, Qt::CaseInsensitive);
-    converted.replace(QString("l"), piec, Qt::CaseInsensitive);
-    converted.replace(QString("ł"), piec, Qt::CaseInsensitive);
-
-    static QString szesc("6");
-    converted.replace(QString("m"), szesc, Qt::CaseInsensitive);
-    converted.replace(QString("n"), szesc, Qt::CaseInsensitive);
-    converted.replace(QString("ń"), szesc, Qt::CaseInsensitive);
-    converted.replace(QString("o"), szesc, Qt::CaseInsensitive);
-    converted.replace(QString("ó"), szesc, Qt::CaseInsensitive);
-
-    static QString siedem("7");
-    converted.replace(QString("p"), siedem, Qt::CaseInsensitive);
-    converted.replace(QString("q"), siedem, Qt::CaseInsensitive);
-    converted.replace(QString("r"), siedem, Qt::CaseInsensitive);
-    converted.replace(QString("s"), siedem, Qt::CaseInsensitive);
-    converted.replace(QString("ś"), siedem, Qt::CaseInsensitive);
-
-    static QString osiem("8");
-    converted.replace(QString("t"), osiem, Qt::CaseInsensitive);
-    converted.replace(QString("u"), osiem, Qt::CaseInsensitive);
-    converted.replace(QString("v"), osiem, Qt::CaseInsensitive);
-
-    static QString dziewiec("9");
-    converted.replace(QString("w"), dziewiec, Qt::CaseInsensitive);
-    converted.replace(QString("x"), dziewiec, Qt::CaseInsensitive);
-    converted.replace(QString("y"), dziewiec, Qt::CaseInsensitive);
-    converted.replace(QString("z"), dziewiec, Qt::CaseInsensitive);
-    converted.replace(QString("ż"), dziewiec, Qt::CaseInsensitive);
-    converted.replace(QString("ź"), dziewiec, Qt::CaseInsensitive);
+    QString converted(word);
+    int index{0};
+    for (QString ch : word)
+    {
+        if (auto it{map.find(ch)}; it != map.end())
+            converted[index] = it->second;
+        ++index;
+    }
 
     return converted;
 }

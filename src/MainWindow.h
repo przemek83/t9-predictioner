@@ -26,7 +26,7 @@ private slots:
 private:
     std::unique_ptr<Ui::MainWindow> ui_;
 
-    void ladujDane();
+    void loadData();
 
     std::multimap<QString, QString> words_;
 };

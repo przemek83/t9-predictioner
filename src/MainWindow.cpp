@@ -14,7 +14,7 @@ MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
 
     ui_->statusBar->showMessage("Loading dictionary...");
 
-    ladujDane();
+    loadData();
 
     ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
                                 " unique combinations.");
@@ -25,7 +25,7 @@ MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
 
 MainWindow::~MainWindow() = default;
 
-void MainWindow::ladujDane()
+void MainWindow::loadData()
 {
     auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
     DataLoader loader(std::move(inFile));

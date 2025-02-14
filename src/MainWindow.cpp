@@ -30,9 +30,6 @@ void MainWindow::loadData()
     auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
     DataLoader loader(std::move(inFile));
     words_ = loader.getData();
-
-    ui_->statusBar->showMessage(tr("Strings loaded ") +
-                                QString::number(words_.size()));
 }
 
 void MainWindow::getWord() const

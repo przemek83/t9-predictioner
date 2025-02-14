@@ -51,7 +51,7 @@ void MainWindow::textChanged(const QString& text)
         const auto& [_, word]{*it};
         ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(word));
         QPushButton* button{new QPushButton(word, ui_->tableWidget)};
-        connect(button, SIGNAL(clicked()), this, SLOT(getWord()));
+        connect(button, &QPushButton::clicked, this, &MainWindow::getWord);
         ui_->tableWidget->setCellWidget(index, 1, button);
         ++index;
     }

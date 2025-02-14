@@ -19,13 +19,9 @@ public:
     ~MainWindow() override;
 
 private slots:
-    void on_pushButton_clicked();
-
-    void on_lineEdit_returnPressed();
-
     void getWord() const;
 
-    void on_lineEdit_textChanged(const QString& arg1);
+    void on_lineEdit_textChanged(const QString& text);
 
 private:
     std::unique_ptr<Ui::MainWindow> ui_;

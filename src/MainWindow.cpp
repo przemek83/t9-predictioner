@@ -18,6 +18,9 @@ MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
 
     ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
                                 " unique combinations.");
+
+    connect(ui_->lineEdit, &QLineEdit::textChanged, this,
+            &MainWindow::textChanged);
 }
 
 MainWindow::~MainWindow() = default;
@@ -38,7 +41,7 @@ void MainWindow::getWord() const
     clipboard->setText(dynamic_cast<QPushButton*>(sender())->text());
 }
 
-void MainWindow::on_lineEdit_textChanged(const QString& text)
+void MainWindow::textChanged(const QString& text)
 {
     ui_->tableWidget->clear();
 

@@ -21,7 +21,7 @@ public:
 private slots:
     void getWord() const;
 
-    void on_lineEdit_textChanged(const QString& text);
+    void textChanged(const QString& text);
 
 private:
     std::unique_ptr<Ui::MainWindow> ui_;

@@ -3,6 +3,7 @@
 #include <istream>
 
 #include "Converter.h"
+#include "Mapping.h"
 
 DataLoader::DataLoader(std::unique_ptr<std::istream> stream)
     : stream_(std::move(stream))
@@ -13,7 +14,7 @@ std::multimap<QString, QString> DataLoader::getData()
 {
     std::string line;
     std::multimap<QString, QString> words;
-    Converter converter;
+    Converter converter(mapping::getMappingPL());
     while (std::getline(*stream_, line))
     {
         QString text{QString::fromStdString(line)};

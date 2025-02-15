@@ -10,12 +10,10 @@ class QString;
 class Converter
 {
 public:
-    Converter();
+    explicit Converter(std::unordered_map<QString, QChar> mapping);
 
     QString convert(const QString& word);
 
 private:
-    static std::unordered_map<QString, QChar> createMapping();
-
     std::unordered_map<QString, QChar> mapping_;
 };

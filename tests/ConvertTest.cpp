@@ -3,6 +3,7 @@
 #include <QTest>
 
 #include <src/Converter.h>
+#include <src/Mapping.h>
 
 void ConvertTest::testConversion_data()
 {
@@ -29,6 +30,6 @@ void ConvertTest::testConversion()
     QFETCH(QString, input);
     QFETCH(const QString, expected);
 
-    Converter converter;
+    Converter converter(mapping::getMappingPL());
     QCOMPARE(converter.convert(input), expected);
 }

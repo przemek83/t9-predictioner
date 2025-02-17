@@ -1,5 +1,6 @@
 #include "DataLoaderTest.h"
 
+#include <sstream>
 #include <fstream>
 #include <map>
 #include <memory>

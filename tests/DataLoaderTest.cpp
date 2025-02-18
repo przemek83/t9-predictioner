@@ -32,7 +32,7 @@ scansion/M
 )"};
 
     auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input), mapping::getMappingPL());
+    DataLoader loader(std::move(input), mapping::getMappingEN());
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{

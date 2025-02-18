@@ -28,7 +28,7 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::loadData()
 {
-    auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
+    auto inFile{std::make_unique<std::ifstream>("dictionaryPL.dic")};
     DataLoader loader(std::move(inFile), mapping::getMappingPL());
     words_ = loader.getData();
 }

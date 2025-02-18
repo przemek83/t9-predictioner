@@ -11,7 +11,8 @@
 
 void DataLoaderTest::testLoading()
 {
-    std::string dictionary{R"(fobia/ANnp
+    std::string dictionary{R"(dobić
+fobia/ANnp
 fochy/lW
 focoso
 focus/NOsTQ
@@ -29,6 +30,7 @@ wysmakowawszy
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{
+        {"36242", "dobić"},
         {"36242", "fobia"},
         {"36249", "fochy"},
         {"362676", "focoso"},

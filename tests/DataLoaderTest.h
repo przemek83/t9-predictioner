@@ -6,7 +6,7 @@ class DataLoaderTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    static void testLoading();
+    static void testLoadingPL();
 
     static void benchmarkLoading();
 };

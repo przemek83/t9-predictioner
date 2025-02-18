@@ -6,6 +6,7 @@
 #include <QPushButton>
 
 #include "DataLoader.h"
+#include "Mapping.h"
 #include "ui_MainWindow.h"
 
 MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
@@ -28,7 +29,7 @@ MainWindow::~MainWindow() = default;
 void MainWindow::loadData()
 {
     auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
-    DataLoader loader(std::move(inFile));
+    DataLoader loader(std::move(inFile), mapping::getMappingPL());
     words_ = loader.getData();
 }
 

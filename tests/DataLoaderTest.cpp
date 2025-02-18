@@ -1,15 +1,16 @@
 #include "DataLoaderTest.h"
 
-#include <sstream>
 #include <fstream>
 #include <map>
 #include <memory>
+#include <sstream>
 
 #include <QTest>
+#include "src/Mapping.h"
 
 #include <src/DataLoader.h>
 
-void DataLoaderTest::testLoading()
+void DataLoaderTest::testLoadingPL()
 {
     std::string dictionary{R"(dobić
 fobia/ANnp
@@ -26,7 +27,7 @@ wysmakowawszy
 )"};
 
     auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input));
+    DataLoader loader(std::move(input), mapping::getMappingPL());
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{
@@ -50,6 +51,6 @@ void DataLoaderTest::benchmarkLoading()
 {
     QSKIP("Skip benchmark.");
     auto inFile{std::make_unique<std::ifstream>("dictionary.dic")};
-    DataLoader loader(std::move(inFile));
+    DataLoader loader(std::move(inFile), mapping::getMappingPL());
     QBENCHMARK { loader.getData(); }
 }

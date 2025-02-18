@@ -8,5 +8,7 @@ class DataLoaderTest : public QObject
 private Q_SLOTS:
     static void testLoadingPL();
 
+    static void testLoadingEN();
+
     static void benchmarkLoading();
 };

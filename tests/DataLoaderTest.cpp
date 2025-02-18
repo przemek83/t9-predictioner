@@ -12,6 +12,45 @@
 
 void DataLoaderTest::testLoadingPL()
 {
+    std::string dictionary{R"(biology/M
+biomarker/MS
+biomass/M
+biomedical
+bionic/S
+embraceable
+embrasure/MS
+embrocation/MS
+embroider/SDRZG
+marmalade/M
+marmoreal
+marmoset/SM
+scammer/S
+scanned
+scanner/SM
+scanning
+scansion/M
+)"};
+
+    auto input{std::make_unique<std::istringstream>(dictionary)};
+    DataLoader loader(std::move(input), mapping::getMappingPL());
+    std::multimap<QString, QString> actual{loader.getData()};
+
+    std::multimap<QString, QString> expected{
+        {"2465649", "biology"},     {"246627537", "biomarker"},
+        {"2466277", "biomass"},     {"2466334225", "biomedical"},
+        {"246642", "bionic"},       {"36272232253", "embraceable"},
+        {"362727873", "embrasure"}, {"36276228466", "embrocation"},
+        {"362764337", "embroider"}, {"627625233", "marmalade"},
+        {"627667325", "marmoreal"}, {"62766738", "marmoset"},
+        {"7226637", "scammer"},     {"7226633", "scanned"},
+        {"7226637", "scanner"},     {"72266464", "scanning"},
+        {"72267466", "scansion"}};
+
+    QCOMPARE(actual, expected);
+}
+
+void DataLoaderTest::testLoadingEN()
+{
     std::string dictionary{R"(dobić
 fobia/ANnp
 fochy/lW

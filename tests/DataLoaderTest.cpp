@@ -51,7 +51,7 @@ wysmakowawszy
 )";
 }
 
-std::multimap<QString, QString> getExpectedMappingPL()
+std::multimap<QString, QString> getExpectedDataPL()
 {
     return {{"36242", "dobić"},
             {"36242", "fobia"},
@@ -67,7 +67,7 @@ std::multimap<QString, QString> getExpectedMappingPL()
             {"9976256929799", "wysmakowawszy"}};
 }
 
-std::multimap<QString, QString> getExpectedMappingEN()
+std::multimap<QString, QString> getExpectedDataEN()
 {
     return {{"2465649", "biology"},     {"246627537", "biomarker"},
             {"2466277", "biomass"},     {"2466334225", "biomedical"},
@@ -90,7 +90,7 @@ void DataLoaderTest::testLoadingPL()
     DataLoader loader(std::move(input), mapping::getMappingPL());
     std::multimap<QString, QString> actual{loader.getData()};
 
-    std::multimap<QString, QString> expected{getExpectedMappingPL()};
+    std::multimap<QString, QString> expected{getExpectedDataPL()};
 
     QCOMPARE(actual, expected);
 }
@@ -103,7 +103,7 @@ void DataLoaderTest::testLoadingEN()
     DataLoader loader(std::move(input), mapping::getMappingEN());
     std::multimap<QString, QString> actual{loader.getData()};
 
-    std::multimap<QString, QString> expected{getExpectedMappingEN()};
+    std::multimap<QString, QString> expected{getExpectedDataEN()};
 
     QCOMPARE(actual, expected);
 }

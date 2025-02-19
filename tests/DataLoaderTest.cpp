@@ -50,6 +50,36 @@ wysmakowany/bXxY
 wysmakowawszy
 )";
 }
+
+std::multimap<QString, QString> getExpectedMappingPL()
+{
+    return {{"36242", "dobić"},
+            {"36242", "fobia"},
+            {"36249", "fochy"},
+            {"362676", "focoso"},
+            {"36287", "focus"},
+            {"832466", "techno"},
+            {"8324662368792969", "technocentryczny"},
+            {"83246623687996", "technocentryzm"},
+            {"83246636242", "technofobia"},
+            {"997625692643", "wysmakowanie"},
+            {"99762569269", "wysmakowany"},
+            {"9976256929799", "wysmakowawszy"}};
+}
+
+std::multimap<QString, QString> getExpectedMappingEN()
+{
+    return {{"2465649", "biology"},     {"246627537", "biomarker"},
+            {"2466277", "biomass"},     {"2466334225", "biomedical"},
+            {"246642", "bionic"},       {"36272232253", "embraceable"},
+            {"362727873", "embrasure"}, {"36276228466", "embrocation"},
+            {"362764337", "embroider"}, {"627625233", "marmalade"},
+            {"627667325", "marmoreal"}, {"62766738", "marmoset"},
+            {"7226637", "scammer"},     {"7226633", "scanned"},
+            {"7226637", "scanner"},     {"72266464", "scanning"},
+            {"72267466", "scansion"}};
+}
+
 }  // namespace
 
 void DataLoaderTest::testLoadingPL()
@@ -60,19 +90,7 @@ void DataLoaderTest::testLoadingPL()
     DataLoader loader(std::move(input), mapping::getMappingPL());
     std::multimap<QString, QString> actual{loader.getData()};
 
-    std::multimap<QString, QString> expected{
-        {"36242", "dobić"},
-        {"36242", "fobia"},
-        {"36249", "fochy"},
-        {"362676", "focoso"},
-        {"36287", "focus"},
-        {"832466", "techno"},
-        {"8324662368792969", "technocentryczny"},
-        {"83246623687996", "technocentryzm"},
-        {"83246636242", "technofobia"},
-        {"997625692643", "wysmakowanie"},
-        {"99762569269", "wysmakowany"},
-        {"9976256929799", "wysmakowawszy"}};
+    std::multimap<QString, QString> expected{getExpectedMappingPL()};
 
     QCOMPARE(actual, expected);
 }
@@ -85,16 +103,7 @@ void DataLoaderTest::testLoadingEN()
     DataLoader loader(std::move(input), mapping::getMappingEN());
     std::multimap<QString, QString> actual{loader.getData()};
 
-    std::multimap<QString, QString> expected{
-        {"2465649", "biology"},     {"246627537", "biomarker"},
-        {"2466277", "biomass"},     {"2466334225", "biomedical"},
-        {"246642", "bionic"},       {"36272232253", "embraceable"},
-        {"362727873", "embrasure"}, {"36276228466", "embrocation"},
-        {"362764337", "embroider"}, {"627625233", "marmalade"},
-        {"627667325", "marmoreal"}, {"62766738", "marmoset"},
-        {"7226637", "scammer"},     {"7226633", "scanned"},
-        {"7226637", "scanner"},     {"72266464", "scanning"},
-        {"72267466", "scansion"}};
+    std::multimap<QString, QString> expected{getExpectedMappingEN()};
 
     QCOMPARE(actual, expected);
 }

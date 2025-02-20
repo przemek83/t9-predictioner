@@ -8,6 +8,8 @@ set(${PROJECT_TESTS}_SOURCES
     ConvertTest.cpp
     DataLoaderTest.h
     DataLoaderTest.cpp
+    MainWindowTest.h
+    MainWindowTest.cpp
 )
 
 file(GLOB DICTIONARY_FILES "${CMAKE_SOURCE_DIR}/*.dic")

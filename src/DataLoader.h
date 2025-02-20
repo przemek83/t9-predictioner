@@ -1,19 +1,17 @@
 #pragma once
 
-#include <map>
 #include <memory>
 
-#include <QString>
-
 #include "Converter.h"
+#include "Loader.h"
 
-class DataLoader
+class DataLoader : public Loader
 {
 public:
     DataLoader(std::unique_ptr<std::istream> stream,
                std::unordered_map<QString, QChar> mapping);
 
-    std::multimap<QString, QString> getData();
+    std::multimap<QString, QString> getData() override;
 
 private:
     std::unique_ptr<std::istream> stream_;

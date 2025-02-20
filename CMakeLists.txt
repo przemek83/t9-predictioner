@@ -32,6 +32,7 @@ set(${PROJECT_NAME}_SOURCES
     src/DataLoader.cpp
     src/Mapping.h
     src/Mapping.cpp
+    src/Loader.h
 )
 
 set(UI

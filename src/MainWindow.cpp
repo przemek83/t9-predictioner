@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include <QClipboard>
+#include <QDir>
 #include <QPushButton>
 
 #include "DataLoader.h"
@@ -13,24 +14,31 @@ MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
 {
     ui_->setupUi(this);
 
-    ui_->statusBar->showMessage("Loading dictionary...");
+    initiateDictionariesComboBox();
 
-    loadData();
-
-    ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
-                                " unique combinations.");
+    loadData(ui_->comboBox->currentText());
 
     connect(ui_->lineEdit, &QLineEdit::textChanged, this,
             &MainWindow::textChanged);
+
+    connect(ui_->comboBox, &QComboBox::currentTextChanged, this,
+            &MainWindow::loadData);
 }
 
 MainWindow::~MainWindow() = default;
 
-void MainWindow::loadData()
+void MainWindow::loadData(const QString& filename)
 {
-    auto inFile{std::make_unique<std::ifstream>("dictionaryPL.dic")};
+    ui_->statusBar->showMessage("Loading dictionary " + filename + "...");
+
+    QApplication::processEvents();
+
+    auto inFile{std::make_unique<std::ifstream>(filename.toStdString())};
     DataLoader loader(std::move(inFile), mapping::getMappingPL());
     words_ = loader.getData();
+
+    ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +
+                                " unique combinations.");
 }
 
 void MainWindow::getWord() const
@@ -56,4 +64,12 @@ void MainWindow::textChanged(const QString& text)
         ui_->tableWidget->setCellWidget(index, 1, button);
         ++index;
     }
+}
+
+void MainWindow::initiateDictionariesComboBox()
+{
+    QDir directory;
+    QStringList dicFiles{directory.entryList({"*.dic"}, QDir::Files)};
+    for (const QString& filename : dicFiles)
+        ui_->comboBox->addItem(filename);
 }

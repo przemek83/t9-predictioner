@@ -24,9 +24,11 @@ private slots:
     void textChanged(const QString& text);
 
 private:
+    void initiateDictionariesComboBox();
+
     std::unique_ptr<Ui::MainWindow> ui_;
 
-    void loadData();
+    void loadData(const QString& filename);
 
     std::multimap<QString, QString> words_;
 };

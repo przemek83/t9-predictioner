@@ -10,6 +10,8 @@ set(${PROJECT_TESTS}_SOURCES
     DataLoaderTest.cpp
     MainWindowTest.h
     MainWindowTest.cpp
+    MappingTest.h
+    MappingTest.cpp
 )
 
 file(GLOB DICTIONARY_FILES "${CMAKE_SOURCE_DIR}/*.dic")

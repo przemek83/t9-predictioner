@@ -7,7 +7,14 @@
 
 namespace mapping
 {
-std::unordered_map<QString, QChar> getMappingPL();
+enum class Language
+{
+    UNKNOWN,
+    PL,
+    EN
+};
 
-std::unordered_map<QString, QChar> getMappingEN();
+Language getLanguage(const QString& dictionaryFileName);
+
+std::unordered_map<QString, QChar> getMapping(Language language);
 }  // namespace mapping

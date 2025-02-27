@@ -87,7 +87,8 @@ void DataLoaderTest::testLoadingPL()
     std::string dictionary{getDictionaryPL()};
 
     auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input), mapping::getMappingPL());
+    DataLoader loader(std::move(input),
+                      mapping::getMapping(mapping::Language::PL));
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{getExpectedDataPL()};
@@ -100,7 +101,8 @@ void DataLoaderTest::testLoadingEN()
     std::string dictionary{getDictionaryEN()};
 
     auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input), mapping::getMappingEN());
+    DataLoader loader(std::move(input),
+                      mapping::getMapping(mapping::Language::EN));
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{getExpectedDataEN()};
@@ -112,6 +114,7 @@ void DataLoaderTest::benchmarkLoading()
 {
     QSKIP("Skip benchmark.");
     auto inFile{std::make_unique<std::ifstream>("dictionaryPL.dic")};
-    DataLoader loader(std::move(inFile), mapping::getMappingPL());
+    DataLoader loader(std::move(inFile),
+                      mapping::getMapping(mapping::Language::PL));
     QBENCHMARK { loader.getData(); }
 }

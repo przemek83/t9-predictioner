@@ -34,7 +34,8 @@ void MainWindow::loadData(const QString& filename)
     QApplication::processEvents();
 
     auto inFile{std::make_unique<std::ifstream>(filename.toStdString())};
-    DataLoader loader(std::move(inFile), mapping::getMappingPL());
+    mapping::Language language{mapping::getLanguage(filename)};
+    DataLoader loader(std::move(inFile), mapping::getMapping(language));
     words_ = loader.getData();
 
     ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +

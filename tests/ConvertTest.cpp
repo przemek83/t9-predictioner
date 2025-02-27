@@ -30,6 +30,6 @@ void ConvertTest::testConversion()
     QFETCH(QString, input);
     QFETCH(const QString, expected);
 
-    Converter converter(mapping::getMappingPL());
+    Converter converter(mapping::getMapping(mapping::Language::PL));
     QCOMPARE(converter.convert(input), expected);
 }

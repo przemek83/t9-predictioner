@@ -1,6 +1,6 @@
 #include "Mapping.h"
 
-namespace mapping
+namespace
 {
 std::unordered_map<QString, QChar> getMappingPL()
 {
@@ -21,6 +21,34 @@ std::unordered_map<QString, QChar> getMappingEN()
             {"p", '7'}, {"q", '7'}, {"r", '7'}, {"s", '7'}, {"t", '8'},
             {"u", '8'}, {"v", '8'}, {"w", '9'}, {"x", '9'}, {"y", '9'},
             {"z", '9'}};
+}
+}  // namespace
+
+namespace mapping
+{
+Language getLanguage(const QString& dictionaryFileName)
+{
+    if (dictionaryFileName.toLower().contains("pl"))
+        return Language::PL;
+
+    if (dictionaryFileName.toLower().contains("en"))
+        return Language::EN;
+
+    return Language::UNKNOWN;
+}
+
+std::unordered_map<QString, QChar> getMapping(Language language)
+{
+    switch (language)
+    {
+        case Language::PL:
+            return getMappingPL();
+        case Language::EN:
+            return getMappingEN();
+
+        default:
+            return {};
+    }
 }
 
 }  // namespace mapping

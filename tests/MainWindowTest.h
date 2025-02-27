@@ -13,4 +13,6 @@ private:
 
 private Q_SLOTS:
     void testCreatingTableWidget() const;
+
+    void testChangingText() const;
 };

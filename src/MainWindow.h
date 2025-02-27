@@ -26,9 +26,9 @@ private slots:
 private:
     void initiateDictionariesComboBox();
 
-    std::unique_ptr<Ui::MainWindow> ui_;
-
     void loadData(const QString& filename);
+
+    std::unique_ptr<Ui::MainWindow> ui_;
 
     std::multimap<QString, QString> words_;
 };

@@ -2,6 +2,7 @@
 
 #include "ConvertTest.h"
 #include "DataLoaderTest.h"
+#include "MainWindowTest.h"
 
 int main(int argc, char* argv[])
 {
@@ -12,6 +13,9 @@ int main(int argc, char* argv[])
 
     DataLoaderTest dataLoaderTest;
     QTest::qExec(&dataLoaderTest);
+
+    MainWindowTest mainWindowTest;
+    QTest::qExec(&mainWindowTest);
 
     return 0;
 }

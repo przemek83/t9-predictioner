@@ -2,6 +2,7 @@
 
 #include <QClipboard>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QTableWidget>
 #include <QtTest>
 
@@ -35,12 +36,10 @@ void MainWindowTest::testChangingText() const
 void MainWindowTest::testCopyingToClipboard() const
 {
     auto* lineEdit{window_.findChild<QLineEdit*>()};
-    auto* tableWidget{window_.findChild<QTableWidget*>()};
-
     lineEdit->setText("34");
 
-    tableWidget->selectRow(0);
-    QTest::keyClick(tableWidget, Qt::Key_C, Qt::ControlModifier);
+    auto* button{window_.findChild<QPushButton*>()};
+    button->click();
 
     const auto* clipboard{QGuiApplication::clipboard()};
     QVERIFY(clipboard->text() == "eh");

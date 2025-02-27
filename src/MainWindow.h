@@ -28,6 +28,8 @@ private:
 
     void loadData(const QString& filename);
 
+    void clearTableWidget();
+
     std::unique_ptr<Ui::MainWindow> ui_;
 
     std::multimap<QString, QString> words_;

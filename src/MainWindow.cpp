@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
 #include <fstream>
+#include <memory>
 
 #include <QClipboard>
 #include <QDir>
@@ -29,6 +30,9 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::loadData(const QString& filename)
 {
+    clearTableWidget();
+    ui_->lineEdit->clear();
+
     ui_->statusBar->showMessage("Loading dictionary " + filename + "...");
 
     QApplication::processEvents();
@@ -42,6 +46,18 @@ void MainWindow::loadData(const QString& filename)
                                 " unique combinations.");
 }
 
+void MainWindow::clearTableWidget()
+{
+    const int rowCount{ui_->tableWidget->rowCount()};
+    for (int row{0}; row < rowCount; ++row)
+    {
+        std::unique_ptr<QWidget> widget{ui_->tableWidget->cellWidget(row, 1)};
+        ui_->tableWidget->removeCellWidget(row, 1);
+    }
+
+    ui_->tableWidget->clear();
+}
+
 void MainWindow::getWord() const
 {
     QClipboard* clipboard{QApplication::clipboard()};
@@ -50,7 +66,7 @@ void MainWindow::getWord() const
 
 void MainWindow::textChanged(const QString& text)
 {
-    ui_->tableWidget->clear();
+    clearTableWidget();
 
     auto [first, last]{words_.equal_range(text)};
 

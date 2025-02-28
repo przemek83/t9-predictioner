@@ -71,15 +71,15 @@ void MainWindow::textChanged(const QString& text)
     auto [first, last]{words_.equal_range(text)};
 
     ui_->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
-    int index{0};
+    int row{0};
     for (auto it{first}; it != last; ++it)
     {
         const auto& [_, word]{*it};
-        ui_->tableWidget->setItem(index, 0, new QTableWidgetItem(word));
+        ui_->tableWidget->setItem(row, 0, new QTableWidgetItem(word));
         QPushButton* button{new QPushButton(word, ui_->tableWidget)};
         connect(button, &QPushButton::clicked, this, &MainWindow::getWord);
-        ui_->tableWidget->setCellWidget(index, 1, button);
-        ++index;
+        ui_->tableWidget->setCellWidget(row, 1, button);
+        ++row;
     }
 }
 

@@ -72,11 +72,15 @@ void MainWindow::textChanged(const QString& text)
 
     ui_->tableWidget->setRowCount(static_cast<int>(std::distance(first, last)));
     int row{0};
+    QStyle::StandardPixmap pixmap{QStyle::SP_BrowserReload};
     for (auto it{first}; it != last; ++it)
     {
         const auto& [_, word]{*it};
         ui_->tableWidget->setItem(row, 0, new QTableWidgetItem(word));
-        QPushButton* button{new QPushButton(word, ui_->tableWidget)};
+
+        QPushButton* button{
+            new QPushButton(QApplication::style()->standardIcon(pixmap), word,
+                            ui_->tableWidget)};
         connect(button, &QPushButton::clicked, this, &MainWindow::getWord);
         ui_->tableWidget->setCellWidget(row, 1, button);
         ++row;

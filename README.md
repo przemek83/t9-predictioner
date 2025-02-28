@@ -52,5 +52,5 @@ The project uses the following software:
 | Name | License | Home | Description |
 | --- | --- | --- | --- |
 | Qt | LGPLv3 | https://www.qt.io/| cross-platform application development framework |
-| PL dictionary | TODO | TODO | TODO |
-| EN dictionary | TODO | TODO | TODO |
+| PL dictionary | GPLv3 or LGPLv3 or MPLv2 | https://github.com/wooorm/dictionaries/tree/main/dictionaries/pl | Polish spelling dictionary |
+| EN dictionary | MIT and BSD | https://github.com/wooorm/dictionaries/tree/main/dictionaries/en | English spelling dictionary |

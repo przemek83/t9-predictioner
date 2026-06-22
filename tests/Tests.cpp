@@ -9,17 +9,18 @@ int main(int argc, char* argv[])
 {
     const QApplication a(argc, argv);
 
+    int status{EXIT_SUCCESS};
     ConvertTest convertTest;
-    QTest::qExec(&convertTest);
+    status = std::max(status, QTest::qExec(&convertTest));
 
     DataLoaderTest dataLoaderTest;
-    QTest::qExec(&dataLoaderTest);
+    status = std::max(status, QTest::qExec(&dataLoaderTest));
 
     MainWindowTest mainWindowTest;
-    QTest::qExec(&mainWindowTest);
+    status = std::max(status, QTest::qExec(&mainWindowTest));
 
     MappingTest mappingTest;
-    QTest::qExec(&mappingTest);
+    status = std::max(status, QTest::qExec(&mappingTest));
 
-    return 0;
+    return status;
 }

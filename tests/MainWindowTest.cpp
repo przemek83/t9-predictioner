@@ -6,33 +6,9 @@
 #include <QTableWidget>
 #include <QtTest>
 
-void MainWindowTest::initTestCase()
-{
-    const QString dicName{"dictionaryEN.dic"};
-    QFile file(dicName);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        QTextStream out(&file);
-        out << "did\n";
-        out << "die\n";
-        out << "fie\n";
-        out << "eh\n";
-        file.close();
-    }
-
-    window_ = std::make_unique<MainWindow>(QStringList() << dicName);
-}
-
-void MainWindowTest::cleanupTestCase()
-{
-    window_.reset();
-    const QString dicName{"dictionaryEN.dic"};
-    QFile::remove(dicName);
-}
-
 void MainWindowTest::testCreatingTableWidget()
 {
-    const auto* tableWidget{window_->findChild<QTableWidget*>()};
+    const auto* tableWidget{window_.findChild<QTableWidget*>()};
 
     QVERIFY(tableWidget != nullptr);
     QVERIFY(tableWidget->rowCount() == 0);
@@ -40,8 +16,8 @@ void MainWindowTest::testCreatingTableWidget()
 
 void MainWindowTest::testChangingText()
 {
-    auto* lineEdit{window_->findChild<QLineEdit*>()};
-    const auto* tableWidget{window_->findChild<QTableWidget*>()};
+    auto* lineEdit{window_.findChild<QLineEdit*>()};
+    const auto* tableWidget{window_.findChild<QTableWidget*>()};
 
     lineEdit->setText("343");
 
@@ -59,10 +35,10 @@ void MainWindowTest::testChangingText()
 
 void MainWindowTest::testCopyingToClipboard()
 {
-    auto* lineEdit{window_->findChild<QLineEdit*>()};
+    auto* lineEdit{window_.findChild<QLineEdit*>()};
     lineEdit->setText("34");
 
-    auto* button{window_->findChild<QPushButton*>()};
+    auto* button{window_.findChild<QPushButton*>()};
     button->click();
 
     const auto* clipboard{QGuiApplication::clipboard()};

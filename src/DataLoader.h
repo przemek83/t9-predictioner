@@ -5,16 +5,18 @@
 #include "Converter.h"
 #include "Loader.h"
 
+class QTextStream;
+
 class DataLoader : public Loader
 {
 public:
-    DataLoader(std::unique_ptr<std::istream> stream,
+    DataLoader(QTextStream& stream,
                std::unordered_map<QString, QChar> mapping);
 
     std::multimap<QString, QString> getData() override;
 
 private:
-    std::unique_ptr<std::istream> stream_;
+    QTextStream& stream_;
     Converter converter_;
     std::unordered_map<QString, QChar> mapping_;
 };

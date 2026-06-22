@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/testDictionaryEN.dic</file>
+    </qresource>
+</RCC>

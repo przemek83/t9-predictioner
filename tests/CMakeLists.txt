@@ -17,6 +17,8 @@ set(${PROJECT_TESTS}_SOURCES
 file(GLOB DICTIONARY_FILES "${CMAKE_SOURCE_DIR}/*.dic")
 file(COPY ${DICTIONARY_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
+qt_add_resources(${PROJECT_TESTS}_SOURCES testResources.qrc)
+
 add_executable(${PROJECT_TESTS} ${${PROJECT_TESTS}_SOURCES})
 
 target_link_libraries(${PROJECT_TESTS} PRIVATE ${PROJECT_NAME}-lib Qt6::Core Qt6::Widgets Qt6::Test)

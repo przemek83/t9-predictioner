@@ -37,9 +37,16 @@ void MainWindow::loadData(const QString& filename)
 
     QApplication::processEvents();
 
-    auto inFile{std::make_unique<std::ifstream>(filename.toStdString())};
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        ui_->statusBar->showMessage("Failed to load dictionary " + filename + ".");
+        return;
+    }
+    QTextStream stream(&file);
+
     mapping::Language language{mapping::getLanguage(filename)};
-    DataLoader loader(std::move(inFile), mapping::getMapping(language));
+    DataLoader loader(stream, mapping::getMapping(language));
     words_ = loader.getData();
 
     ui_->statusBar->showMessage("Loaded " + QString::number(words_.size()) +

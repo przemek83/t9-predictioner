@@ -1,25 +1,25 @@
 #include "DataLoader.h"
 
-#include <istream>
+#include <QTextStream>
 
-DataLoader::DataLoader(std::unique_ptr<std::istream> stream,
+DataLoader::DataLoader(QTextStream& stream,
                        std::unordered_map<QString, QChar> mapping)
-    : stream_(std::move(stream)), converter_{std::move(mapping)}
+    : stream_(stream), converter_{std::move(mapping)}
 {
 }
 
 std::multimap<QString, QString> DataLoader::getData()
 {
-    std::string line;
+    QString line;
     std::multimap<QString, QString> words;
-    while (std::getline(*stream_, line))
-    {
-        QString text{QString::fromStdString(line)};
-        if (qsizetype index{text.indexOf('/')}; index != -1)
-            text.truncate(index);
 
-        QString converted{converter_.convert(text)};
-        words.emplace(converted, std::move(text));
+    while (line = stream_.readLine(), !line.isNull())
+    {
+        if (qsizetype index{line.indexOf('/')}; index != -1)
+            line.truncate(index);
+
+        QString converted{converter_.convert(line)};
+        words.emplace(converted, std::move(line));
     }
 
     return words;

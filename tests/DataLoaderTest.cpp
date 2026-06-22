@@ -12,7 +12,7 @@
 
 namespace
 {
-std::string getDictionaryEN()
+QString getDictionaryEN()
 {
     return R"(biology/M
 biomarker/MS
@@ -34,7 +34,7 @@ scansion/M
 )";
 }
 
-std::string getDictionaryPL()
+QString getDictionaryPL()
 {
     return R"(dobić
 fobia/ANnp
@@ -84,11 +84,10 @@ std::multimap<QString, QString> getExpectedDataEN()
 
 void DataLoaderTest::testLoadingPL()
 {
-    std::string dictionary{getDictionaryPL()};
+    QString dictionary{getDictionaryPL()};
+    QTextStream stream(&dictionary);
+    DataLoader loader(stream, mapping::getMapping(mapping::Language::PL));
 
-    auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input),
-                      mapping::getMapping(mapping::Language::PL));
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{getExpectedDataPL()};
@@ -98,11 +97,10 @@ void DataLoaderTest::testLoadingPL()
 
 void DataLoaderTest::testLoadingEN()
 {
-    std::string dictionary{getDictionaryEN()};
+    QString dictionary{getDictionaryEN()};
+    QTextStream stream(&dictionary);
+    DataLoader loader(stream, mapping::getMapping(mapping::Language::EN));
 
-    auto input{std::make_unique<std::istringstream>(dictionary)};
-    DataLoader loader(std::move(input),
-                      mapping::getMapping(mapping::Language::EN));
     std::multimap<QString, QString> actual{loader.getData()};
 
     std::multimap<QString, QString> expected{getExpectedDataEN()};
@@ -113,8 +111,12 @@ void DataLoaderTest::testLoadingEN()
 void DataLoaderTest::benchmarkLoading()
 {
     QSKIP("Skip benchmark.");
-    auto inFile{std::make_unique<std::ifstream>("dictionaryPL.dic")};
-    DataLoader loader(std::move(inFile),
-                      mapping::getMapping(mapping::Language::PL));
+    QString filename{QString::fromStdString("dictionaryPL.dic")};
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        QFAIL("Failed to open dictionary file .");
+
+    QTextStream stream(&file);
+    DataLoader loader(stream, mapping::getMapping(mapping::Language::PL));
     QBENCHMARK { loader.getData(); }
 }

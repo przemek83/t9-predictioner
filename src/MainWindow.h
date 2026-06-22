@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow();
+    explicit MainWindow(QStringList dictionaryFiles);
     ~MainWindow() override;
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
     void textChanged(const QString& text);
 
 private:
-    void initiateDictionariesComboBox();
+    void initiateDictionariesComboBox(QStringList dictionaryFiles);
 
     void loadData(const QString& filename);
 

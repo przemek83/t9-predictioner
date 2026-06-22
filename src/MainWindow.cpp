@@ -11,11 +11,11 @@
 #include "Mapping.h"
 #include "ui_MainWindow.h"
 
-MainWindow::MainWindow() : ui_{std::make_unique<Ui::MainWindow>()}
+MainWindow::MainWindow(QStringList dictionaryFiles) : ui_{std::make_unique<Ui::MainWindow>()}
 {
     ui_->setupUi(this);
 
-    initiateDictionariesComboBox();
+    initiateDictionariesComboBox(dictionaryFiles);
 
     loadData(ui_->comboBox->currentText());
 
@@ -87,10 +87,8 @@ void MainWindow::textChanged(const QString& text)
     }
 }
 
-void MainWindow::initiateDictionariesComboBox()
+void MainWindow::initiateDictionariesComboBox(QStringList dictionaryFiles)
 {
-    QDir directory;
-    QStringList dicFiles{directory.entryList({"*.dic"}, QDir::Files)};
-    for (const QString& filename : dicFiles)
+    for (const QString& filename : dictionaryFiles)
         ui_->comboBox->addItem(filename);
 }

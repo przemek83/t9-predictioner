@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <memory>
 
 #include "src/MainWindow.h"
 
@@ -9,12 +10,16 @@ class MainWindowTest : public QObject
     Q_OBJECT
 
 private:
-    MainWindow window_;
+    std::unique_ptr<MainWindow> window_;
 
 private Q_SLOTS:
-    void testCreatingTableWidget() const;
+    void initTestCase();
 
-    void testChangingText() const;
+    void cleanupTestCase();
 
-    void testCopyingToClipboard() const;
+    void testCreatingTableWidget();
+
+    void testChangingText();
+
+    void testCopyingToClipboard();
 };
